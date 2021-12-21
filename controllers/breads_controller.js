@@ -1,9 +1,12 @@
 const express = require('express')
 const breadsRouter = express.Router()
-const breadsModel = require('../models/bread.js')
+const breadsModel = require('../models/bread')
 
 breadsRouter.get('/', (req, res) => {
-    res.json(breadsModel)
+    res.render('index', {
+        title: "breads page",
+        breads: breadsModel
+    })
 })
 
 // INDEX
