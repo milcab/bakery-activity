@@ -18,4 +18,14 @@ router.get('/', (req, res) => {
     res.render('places/index', { places })
 })
 
+router.get('/new', (req, res) => {
+    res.render('places/new/index')
+})
+router.get('/show/:placeId', (req, res) => {
+    res.render('places/show/index', { placeId: req.params.placeId })
+})
+router.get('/edit/:placeId', (req, res) => {
+    res.render('places/edit/index', { placeId: req.params.placeId })
+})
+
 module.exports = router
