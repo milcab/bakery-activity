@@ -1,7 +1,7 @@
 const React = require("react");
-const Def = require("./layouts/default");
+const Def = require("../layouts/default");
 
-function error404() {
+function Index() {
   return (
     <Def>
       <main>
@@ -12,4 +12,4 @@ function error404() {
   );
 }
 
-module.exports = error404;
+module.exports = Index;
