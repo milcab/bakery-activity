@@ -11,7 +11,6 @@ app.engine('jsx', require('express-react-views').createEngine())
 //routes
 app.use('/places', require('./controllers/places.js'))
 
-
 app.get('*', (req, res) => {
     res.render('404/index')
 })
