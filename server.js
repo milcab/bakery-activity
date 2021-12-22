@@ -7,11 +7,15 @@ const app = express()
 app.set('views', __dirname + '/views')
 app.set('view engine', 'jsx')
 app.engine('jsx', require('express-react-views').createEngine())
+//routes
+
+app.use('/breads', require('./controllers/breads_controller.js'))
+
+app.use('/places', require('./controllers/places.js'))
 
 app.get('*', (req, res) => {
-    res.render('error404')
+    res.render('404/index')
 })
-app.use('/breads', require('./controllers/breads_controller.js'))
 
 const PORT = process.env.PORT || 3000
 
