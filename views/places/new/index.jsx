@@ -8,7 +8,7 @@ function Index() {
         <h1>Add a new bread</h1>
         <form action="new" method="POST">
           <div className="form-group">
-            <label for="breadName">Name</label>
+            <label for="breadName">Place Name</label>
             <input
               type="text"
               className="form-control"
@@ -16,6 +16,43 @@ function Index() {
               name="name"
               aria-describedby="breadHelp"
               placeholder="Enter Bread Name"
+            />
+
+            <label for="breadName">Place Picture</label>
+            <input
+              type="text"
+              className="form-control"
+              id="breadName"
+              name="picture"
+              aria-describedby="breadHelp"
+              placeholder="Enter Bread Picture"
+            />
+            <label for="breadName">City</label>
+            <input
+              type="text"
+              className="form-control"
+              id="breadName"
+              name="city"
+              aria-describedby="breadHelp"
+              placeholder="Enter City"
+            />
+            <label for="breadName">State</label>
+            <input
+              type="text"
+              className="form-control"
+              id="breadName"
+              name="state"
+              aria-describedby="breadHelp"
+              placeholder="Enter State Name"
+            />
+            <label for="breadName">Cuisines</label>
+            <input
+              type="text"
+              className="form-control"
+              id="breadName"
+              name="cuicines"
+              aria-describedby="breadHelp"
+              placeholder="Cuisines Name :-)"
             />
             <small id="breadHelp" className="form-text text-muted">
               We love bread!
