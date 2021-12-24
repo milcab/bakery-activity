@@ -10,6 +10,7 @@ function Index() {
           <div className="form-group">
             <label for="breadName">Place Name</label>
             <input
+              required
               type="text"
               className="form-control"
               id="breadName"
@@ -20,12 +21,13 @@ function Index() {
 
             <label for="breadName">Place Picture</label>
             <input
+              required
               type="text"
               className="form-control"
               id="breadName"
               name="picture"
               aria-describedby="breadHelp"
-              placeholder="Enter Bread Picture"
+              placeholder="Enter Picture"
             />
             <label for="breadName">City</label>
             <input
