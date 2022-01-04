@@ -1,20 +1,20 @@
 const express = require('express')
 const breadsRouter = express.Router()
-const breadsModel = require('../models/bread')
+const breads = require('../models/bread')
 
-
+// show list of breads
 breadsRouter.get('/', (req, res) => {
-    res.render('index', {
+    res.render('breads/list', {
         title: "breads page",
-        breads: breadsModel
+        breads: breads
     })
 })
 
-// SHOW
+// SHOW bread by index
 breadsRouter.get('/:arrayIndex', (req, res) => {
-    if (breadsModel[req.params.arrayIndex]) {
-        res.render('breads/show/index', {
-            bread: breadsModel[req.params.arrayIndex],
+    if (breads[req.params.arrayIndex]) {
+        res.render('breads/show', {
+            bread: breads[req.params.arrayIndex],
             index: req.params.arrayIndex,
         })
     } else {
@@ -22,12 +22,36 @@ breadsRouter.get('/:arrayIndex', (req, res) => {
     }
 })
 
-breadsRouter.delete('/:arrayIndex', (req, res) => {
-    res.send('deleted')
+// SHOW new bread form
+breadsRouter.get('/new', (req, res) => {
+    res.render('breads/new')
 })
 
+// SHOW edit bread form
+breadsRouter.get('/edit/:arrayIndex', (req, res) => {
+    if (breads[req.params.arrayIndex]) {
+        res.render('breads/edit', {
+            bread: breads[req.params.arrayIndex],
+            index: req.params.arrayIndex,
+        })
+    } else {
+        res.render('404')
+    }
+})
+
+// NEW
 breadsRouter.post('/:arrayIndex', (req, res) => {
-    res.send('ok')
+    // TODO: add new bread to the breads array
+})
+
+// DELETE
+breadsRouter.delete('/:arrayIndex', (req, res) => {
+    // TODO: remove bread from the breads array by arrayIndex
+})
+
+// EDIT
+breadsRouter.put('/:arrayIndex', (req, res) => {
+    // TODO: edit bread from the breads array by arrayIndex
 })
 
 module.exports = breadsRouter

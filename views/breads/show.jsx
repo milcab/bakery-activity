@@ -1,5 +1,5 @@
 const React = require("react");
-const Default = require("../../layouts/default");
+const Default = require("../layouts/default");
 
 function Index({ bread, index }) {
   return (
@@ -7,7 +7,7 @@ function Index({ bread, index }) {
       <div>
         <h2>{bread.name}</h2>
         <img src={bread.image} alt={bread.name} />
-
+        <p>{bread.hasGluten}</p>
         <form action={`/breads/${index}?_method=DELETE`} method="POST">
           <input type="submit" value="DELETE" />
         </form>
