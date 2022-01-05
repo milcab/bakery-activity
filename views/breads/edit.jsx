@@ -1,12 +1,12 @@
 const React = require("react");
 const Def = require("../layouts/default");
 
-function Index({ bread }) {
+function Index({ bread, index }) {
   return (
     <Def>
       <main>
-        <h1>Add a new bread</h1>
-        <form action="new" method="POST">
+        <h1>Edit {bread.name}</h1>
+        <form action={`/breads/${index}?_method=PUT`} method="POST">
           <div className="form-group">
             <label for="breadName">Bread Name</label>
             <input
@@ -15,6 +15,7 @@ function Index({ bread }) {
               className="form-control"
               id="breadName"
               name="name"
+              value={bread.name}
               aria-describedby="breadHelp"
               placeholder="Enter Bread Name"
             />
@@ -26,6 +27,7 @@ function Index({ bread }) {
               className="form-control"
               id="imageUrl"
               name="image"
+              value={bread.image}
               placeholder="https://bread.com/bestBread.jpg"
             />
           </div>
@@ -34,6 +36,7 @@ function Index({ bread }) {
               type="checkbox"
               className="form-check-input"
               id="hasGluten"
+              checked={bread.hasGluten}
               name="hasGluten"
             />
             <label className="form-check-label" for="hasGluten">

@@ -18,7 +18,19 @@ breadsRouter.get('/:arrayIndex', (req, res) => {
             index: req.params.arrayIndex,
         })
     } else {
-        res.render('404')
+        res.render('error404')
+    }
+})
+
+// SHOW bread by index
+breadsRouter.get('/:arrayIndex/edit', (req, res) => {
+    if (breads[req.params.arrayIndex]) {
+        res.render('breads/edit', {
+            bread: breads[req.params.arrayIndex],
+            index: req.params.arrayIndex,
+        })
+    } else {
+        res.render('error404')
     }
 })
 
@@ -35,7 +47,7 @@ breadsRouter.get('/edit/:arrayIndex', (req, res) => {
             index: req.params.arrayIndex,
         })
     } else {
-        res.render('404')
+        res.render('error404')
     }
 })
 
@@ -48,7 +60,7 @@ breadsRouter.put('/:arrayIndex', (req, res) => {
     }
 
     breads[req.params.arrayIndex] = req.body
-    res.redirect(`/breads/${req.params.arrayIndex}`)
+    res.redirect(`/breads`)
 })
 
 // NEW
