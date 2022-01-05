@@ -39,19 +39,35 @@ breadsRouter.get('/edit/:arrayIndex', (req, res) => {
     }
 })
 
+// UPDATE
+breadsRouter.put('/:arrayIndex', (req, res) => {
+    if (req.body.hasGluten === 'on') {
+        req.body.hasGluten = true
+    } else {
+        req.body.hasGluten = false
+    }
+
+    breads[req.params.arrayIndex] = req.body
+    res.redirect(`/breads/${req.params.arrayIndex}`)
+})
+
 // NEW
 breadsRouter.post('/:arrayIndex', (req, res) => {
     // TODO: add new bread to the breads array
 })
 
-// DELETE
-breadsRouter.delete('/:arrayIndex', (req, res) => {
-    // TODO: remove bread from the breads array by arrayIndex
-})
-
-// EDIT
-breadsRouter.put('/:arrayIndex', (req, res) => {
-    // TODO: edit bread from the breads array by arrayIndex
+breadsRouter.delete('/:id', (req, res) => {
+    let id = Number(req.params.id)
+    if (isNaN(id)) {
+        res.render('error404')
+    }
+    else if (!breads[id]) {
+        res.render('error404')
+    }
+    else {
+        breads.splice(id, 1)
+        res.redirect('/breads')
+    }
 })
 
 module.exports = breadsRouter

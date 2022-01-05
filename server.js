@@ -13,10 +13,15 @@ app.engine('jsx', require('express-react-views').createEngine())
 app.use(methodOverride('_method'))
 // DEPENDENCIES
 
-//routes
-app.use('/', require('./controllers/breads.js'))
+// home page
+app.get('/', (req, res) => {
+    res.render('index')
+})
+// breads rotes
+app.use('/breads', require('./controllers/breads.js'))
+// page not found
 app.get('*', (req, res) => {
-    res.render('404/index')
+    res.render('error404')
 })
 
 
