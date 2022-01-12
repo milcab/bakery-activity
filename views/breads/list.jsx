@@ -2,20 +2,26 @@ const React = require("react");
 const Default = require("../layouts/Default");
 
 const Items = ({ items }) => {
+  console.log({
+    items: items.map((item) => item.id),
+  });
   return (
     <div className="container">
+      <a href="/breads/new" className="btn btn-primary">
+        Add a New Bread
+      </a>
       <div className="row">
-        {items.map((items, index) => {
+        {items.map((item) => {
           return (
-            <div key={index} className="col-md-4">
+            <div key={item.id} className="col-md-4">
               <div className="card card mb-4 shadow-sm">
-                <img src={items.image} className="card-img-top" />
+                <img src={item.image} className="card-img-top" />
                 <div className="card-body">
-                  <a href={`/breads/${index}`}>
-                    <h5 className="card-title">{items.name}</h5>
+                  <a href={`/breads/show/${item.id}`}>
+                    <h5 className="card-title">{item.name}</h5>
                   </a>
-                  <p className="card-text">Has Gluten {items.hasGluten}</p>
-                  <p className="card-text">price {items.price || "free"}</p>
+                  <p className="card-text">Has Gluten {item.hasGluten}</p>
+                  <p className="card-text">price {item.price || "free"}</p>
                   <a href="#" className="btn btn-primary">
                     add To cart
                   </a>
