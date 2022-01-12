@@ -16,6 +16,9 @@ function Index({ bread, index }) {
                   <button type="submit" className="btn btn-danger">
                     Delete
                   </button>
+                  <button type="submit" className="btn btn-primary">
+                    Go Home
+                  </button>
                 </form>
               </div>
               <div className="col-sm-6">
