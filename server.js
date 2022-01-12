@@ -13,8 +13,15 @@ app.set('view engine', 'jsx')
 app.engine('jsx', require('express-react-views').createEngine())
 app.use(methodOverride('_method'))
 // DEPENDENCIES
-mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true }),
-()=>{console.log('connected to mongo:',process.env.MONGO_URI)}
+
+// Connect to mongodb
+mongoose.connect(
+    process.env.MONGO_URI,
+    { useNewUrlParser: true, useUnifiedTopology: true },
+    () => {
+        console.log('connected to mongo:', process.env.MONGO_URI)
+    }
+);
 
 // home page
 app.get('/', (req, res) => {
@@ -22,6 +29,7 @@ app.get('/', (req, res) => {
 })
 // breads rotes
 app.use('/breads', require('./controllers/breads.js'))
+
 // page not found
 app.get('*', (req, res) => {
     res.render('error404')
