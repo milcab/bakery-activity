@@ -18,7 +18,7 @@ function Default(html) {
           integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
           crossorigin="anonymous"
         /> */}
-        <link rel="stylesheet" href="style.css" />
+        <link rel="stylesheet" href="/style.css" />
       </head>
       <body>
         <div className="container">
