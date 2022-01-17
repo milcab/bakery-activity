@@ -11,6 +11,10 @@ function cleanFormData(formData) {
     }
 }
 
+function goHome(res) {
+    res.status(303).redirect('/breads')
+}
+
 // [GET] /breads renders list of breads
 breadsRouter.get('/', async (req, res) => {
     const breads = await bread.find()
@@ -26,7 +30,7 @@ breadsRouter.post('/', (req, res) => {
     const breadData = cleanFormData(req.body);
 
     bread.create(breadData).then(() => {
-        res.redirect('/breads')
+        goHome(res);
     });
 })
 
@@ -46,8 +50,8 @@ breadsRouter.get('/:breadId', async (req, res) => {
 // [PUT] /breads/breadId updates Bread by Id
 breadsRouter.put('/:breadId', async (req, res) => {
     const breadData = cleanFormData(req.body);
-    bread.findByIdAndUpdate(req.params.breadId, breadData).then(() => {
-        res.redirect('/breads')
+    bread.findByIdAndUpdate(req.params.breadId, breadData, { new: true }).then(() => {
+        goHome(res);
     });
 })
 
@@ -55,7 +59,7 @@ breadsRouter.put('/:breadId', async (req, res) => {
 breadsRouter.delete('/:breadId', (req, res) => {
     bread.findByIdAndDelete(req.params.breadId)
         .then(() => {
-            res.status(303).redirect('/breads')
+            goHome(res);
         })
 })
 
@@ -80,7 +84,7 @@ breadsRouter.get('/new', (req, res) => {
 // [GET] /breads/mockData adds 4 test breads to collection and redirects to /breads
 breadsRouter.get('/mockData', (req, res) => {
     bread.insertMany(mockData).then(() => {
-        res.redirect('/breads')
+        goHome(res);
     });
 })
 
