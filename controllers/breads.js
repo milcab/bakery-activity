@@ -3,7 +3,15 @@ const breadsRouter = express.Router()
 const mockData = require("./mockData.json")
 const bread = require('../models/bread')
 
-// show list of breads
+function cleanFormData(formData) {
+    return {
+        ...formData,
+        image: formData.image || undefined,
+        hasGluten: formData.hasGluten === 'on'
+    }
+}
+
+// [GET] /breads renders list of breads
 breadsRouter.get('/', async (req, res) => {
     const breads = await bread.find()
 
@@ -13,92 +21,67 @@ breadsRouter.get('/', async (req, res) => {
     })
 })
 
-// NEW
+// [POST] /breads Add new bread object
 breadsRouter.post('/', (req, res) => {
-    req.body.image = req.body.image || undefined
-    req.body.hasGluten = req.body.hasGluten === 'on'
+    const breadData = cleanFormData(req.body);
 
-    bread.create(req.body).then(() => {
+    bread.create(breadData).then(() => {
         res.redirect('/breads')
     });
 })
 
-// Add 4 test breads
-breadsRouter.get('/mockData', (req, res) => {
-    bread.insertMany(mockData).then(() => {
-        res.redirect('/breads')
-    });
-})
-
-// SHOW bread by index
-breadsRouter.get('/show/:breadId', async (req, res) => {
+// [GET] /breads/breadId Renders Bread Details Page
+breadsRouter.get('/:breadId', async (req, res) => {
     const foundBread = await bread.findById(req.params.breadId);
 
     if (foundBread) {
         res.render('breads/show', {
-            bread: foundBread,
-            index: req.params.arrayIndex,
+            bread: foundBread
         })
     } else {
         res.render('error404')
     }
 })
 
-// SHOW bread by index
-breadsRouter.get('/:arrayIndex/edit', async (req, res) => {
-    const breads = await bread.find();
+// [PUT] /breads/breadId updates Bread by Id
+breadsRouter.put('/:breadId', async (req, res) => {
+    const breadData = cleanFormData(req.body);
+    bread.findByIdAndUpdate(req.params.breadId, breadData).then(() => {
+        res.redirect('/breads')
+    });
+})
 
-    if (breads[req.params.arrayIndex]) {
+// [DELETE] /breads/breadId Deletes Bread by Id
+breadsRouter.delete('/:breadId', (req, res) => {
+    bread.findByIdAndDelete(req.params.breadId)
+        .then(() => {
+            res.status(303).redirect('/breads')
+        })
+})
+
+// [GET] /breads/breadId/edit Renders Edit Form by bread Id
+breadsRouter.get('/:breadId/edit', async (req, res) => {
+    const { breadId } = req.params;
+    const foundBread = await bread.findById(breadId);
+    if (foundBread) {
         res.render('breads/edit', {
-            bread: breads[req.params.arrayIndex],
-            index: req.params.arrayIndex,
+            bread: foundBread
         })
     } else {
         res.render('error404')
     }
 })
 
-// SHOW new bread form
+// [GET] /breads/new Renders renders new bread form page
 breadsRouter.get('/new', (req, res) => {
     res.render('breads/new')
 })
 
-// SHOW edit bread form
-breadsRouter.get('/edit/:arrayIndex', async (req, res) => {
-    const breads = await bread.find();
-    if (breads[req.params.arrayIndex]) {
-        res.render('breads/edit', {
-            bread: breads[req.params.arrayIndex],
-            index: req.params.arrayIndex,
-        })
-    } else {
-        res.render('error404')
-    }
-})
-
-// UPDATE
-breadsRouter.put('/:arrayIndex', (req, res) => {
-    if (!req.body.image) {
-        req.body.image = undefined
-    }
-
-    if (req.body.hasGluten === 'on') {
-        req.body.hasGluten = true
-    } else {
-        req.body.hasGluten = false
-    }
-
-    // breads[req.params.arrayIndex] = req.body
-    res.redirect(`/breads`)
-})
-
-
-
-breadsRouter.delete('/:id', (req, res) => {
-    bread.findByIdAndDelete(req.params.id)
-        .then(() => {
-            res.status(303).redirect('/breads')
-        })
+// [GET] /breads/mockData adds 4 test breads to collection and redirects to /breads
+breadsRouter.get('/mockData', (req, res) => {
+    bread.insertMany(mockData).then(() => {
+        res.redirect('/breads')
+    });
 })
 
 module.exports = breadsRouter
