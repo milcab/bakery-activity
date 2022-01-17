@@ -1,3 +1,8 @@
 .form-group {
-    background-color: rgb(61, 61, 164);
+  background-color: rgb(61, 61, 164);
+}
+
+.item-thumbnail-image {
+  max-width: 338px;
+  max-height: 225.44px;
 }

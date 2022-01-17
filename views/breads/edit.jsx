@@ -1,12 +1,12 @@
 const React = require("react");
 const Def = require("../layouts/default");
 
-function Index({ bread, index }) {
+function Index({ bread }) {
   return (
     <Def>
       <main>
         <h1>Edit {bread.name}</h1>
-        <form action={`/breads/${index}?_method=PUT`} method="POST">
+        <form action={`/breads/${bread.id}?_method=PUT`} method="POST">
           <div className="form-group">
             <label for="breadName">Bread Name</label>
             <input

@@ -7,15 +7,20 @@ const Items = ({ items }) => {
   });
   return (
     <div className="container">
-      <a href="/breads/new" className="btn btn-primary">
-        Add a New Bread
-      </a>
+      <div className="py-2">
+        <a href="/breads/new" className="btn btn-primary">
+          Add a New Bread
+        </a>
+      </div>
       <div className="row">
         {items.map((item) => {
           return (
             <div key={item.id} className="col-md-4">
               <div className="card card mb-4 shadow-sm">
-                <img src={item.image} className="card-img-top" />
+                <img
+                  src={item.image}
+                  className="card-img-top item-thumbnail-image"
+                />
                 <div className="card-body">
                   <a href={`/breads/show/${item.id}`}>
                     <h5 className="card-title">{item.name}</h5>
