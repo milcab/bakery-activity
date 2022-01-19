@@ -28,7 +28,16 @@ function Index({ bread }) {
               name="image"
               placeholder="https://bread.com/bestBread.jpg"
             />
-          </div>
+             </div>
+            <label htmlFor="baker">Baker</label>
+            <select name="baker" id="baker">
+              <option value="Rachel">Rachel</option>
+              <option value="Monica">Monica</option>
+              <option value="Joey">Joey</option>
+              <option value="Chandler">Chandler</option>
+              <option value="Ross">Ross</option>
+              <option value="Phoebe">Phoebe</option>
+            </select>
           <div className="form-group form-check">
             <input
               type="checkbox"
