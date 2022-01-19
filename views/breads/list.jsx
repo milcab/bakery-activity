@@ -22,7 +22,7 @@ const Items = ({ items }) => {
                   className="card-img-top item-thumbnail-image"
                 />
                 <div className="card-body">
-                  <a href={`/breads/show/${item.id}`}>
+                  <a href={`/breads/bread/${item.id}`}>
                     <h5 className="card-title">{item.name}</h5>
                   </a>
                   <p className="card-text">Has Gluten {item.hasGluten}</p>
