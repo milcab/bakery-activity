@@ -8,6 +8,7 @@ function Index({ bread }) {
         <div className="row p-4">
           <div className="col-sm-12 col-md-6">
             <img src={bread.image} alt={bread.name} className="img-fluid" />
+            <p>{bread.getBakedBy()}</p>
           </div>
           <div className="col-sm-12 col-md-6">
             <div className="row p-2">

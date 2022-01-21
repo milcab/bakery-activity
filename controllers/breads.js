@@ -38,7 +38,10 @@ breadsRouter.post('/', (req, res) => {
 breadsRouter.get('/bread/:breadId', async (req, res) => {
     const foundBread = await bread.findById(req.params.breadId);
 
-    if (foundBread) {
+    if (foundBread => {
+        const bakedBy = foundBread.getBakedBy()
+        console.log(bakedBy)
+    }) {
         res.render('breads/show', {
             bread: foundBread
         })

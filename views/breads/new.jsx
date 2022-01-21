@@ -6,7 +6,7 @@ function Index({ bread }) {
     <Def>
       <main>
         <h1>Add a new bread</h1>
-        <form action="new" method="POST">
+        <form action="/breads" method="POST">
           <div className="form-group">
             <label for="breadName">Bread Name</label>
             <input
@@ -28,16 +28,16 @@ function Index({ bread }) {
               name="image"
               placeholder="https://bread.com/bestBread.jpg"
             />
-             </div>
-            <label htmlFor="baker">Baker</label>
-            <select name="baker" id="baker">
-              <option value="Rachel">Rachel</option>
-              <option value="Monica">Monica</option>
-              <option value="Joey">Joey</option>
-              <option value="Chandler">Chandler</option>
-              <option value="Ross">Ross</option>
-              <option value="Phoebe">Phoebe</option>
-            </select>
+          </div>
+          <label htmlFor="baker">Baker</label>
+          <select name="baker" id="baker">
+            <option value="Rachel">Rachel</option>
+            <option value="Monica">Monica</option>
+            <option value="Joey">Joey</option>
+            <option value="Chandler">Chandler</option>
+            <option value="Ross">Ross</option>
+            <option value="Phoebe">Phoebe</option>
+          </select>
           <div className="form-group form-check">
             <input
               type="checkbox"
