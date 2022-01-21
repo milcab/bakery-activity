@@ -4,6 +4,9 @@ const express = require('express')
 const app = express()
 const methodOverride = require('method-override')
 const mongoose = require('mongoose')
+const bakersController = require('./controllers/bakers_controller')
+
+
 
 // MIDDLEWARE
 app.use(express.urlencoded({ extended: true }))
@@ -12,6 +15,7 @@ app.set('views', __dirname + '/views')
 app.set('view engine', 'jsx')
 app.engine('jsx', require('express-react-views').createEngine())
 app.use(methodOverride('_method'))
+app.use('/bakers', bakersController)
 // DEPENDENCIES
 
 // Connect to mongodb
@@ -28,7 +32,10 @@ app.get('/', (req, res) => {
     res.render('index')
 })
 // breads rotes
-app.use('/breads', require('./controllers/breads.js'))
+app.use('/breads', require('./controllers/breads'))
+
+//bakers
+
 
 // page not found
 app.get('*', (req, res) => {
