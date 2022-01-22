@@ -1,7 +1,7 @@
 const React = require("react");
 const Def = require("../layouts/default");
 
-function Index({ bread }) {
+function Index({ bread, bakers }) {
   return (
     <Def>
       <main>
@@ -33,12 +33,11 @@ function Index({ bread }) {
           </div>
           <label htmlFor="baker">Baker</label>
           <select name="baker" id="baker" defaultValue={bread.baker}>
-            <option value="Rachel">Rachel</option>
-            <option value="Monica">Monica</option>
-            <option value="Joey">Joey</option>
-            <option value="Chandler">Chandler</option>
-            <option value="Ross">Ross</option>
-            <option value="Phoebe">Phoebe</option>
+            {bakers.map((baker) => (
+              <option key={baker.id} value={baker.id}>
+                {baker.name}
+              </option>
+            ))}
           </select>
           <div className="form-group form-check">
             <input

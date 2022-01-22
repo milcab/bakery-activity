@@ -2,9 +2,6 @@ const React = require("react");
 const Default = require("../layouts/Default");
 
 const Items = ({ items }) => {
-  console.log({
-    items: items.map((item) => item.id),
-  });
   return (
     <div className="container">
       <div className="py-2">
@@ -51,3 +48,4 @@ function Index({ title, breads = [] }) {
 }
 
 module.exports = Index;
+module.exports.Breads = Items;

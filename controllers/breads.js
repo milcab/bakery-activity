@@ -1,7 +1,8 @@
 const express = require('express')
-const breadsRouter = express.Router()
+const bread = express.Router()
 const mockData = require("./mockData.json")
-const bread = require('../models/bread')
+const Bread = require('../models/bread')
+const Baker = require('../models/baker')
 
 function cleanFormData(formData) {
     return {
@@ -16,27 +17,29 @@ function goHome(res) {
 }
 
 // [GET] /breads renders list of breads
-breadsRouter.get('/', async (req, res) => {
-    const breads = await bread.find()
+bread.get('/', async (req, res) => {
+    const breads = await Bread.find()
+    const bakers = await Baker.find()
 
-    res.render('breads/list', {
-        title: "breads page",
-        breads
+    res.render('index', {
+        breads,
+        bakers,
+        title: 'Index Page'
     })
 })
 
 // [POST] /breads Add new bread object
-breadsRouter.post('/', (req, res) => {
+bread.post('/', (req, res) => {
     const breadData = cleanFormData(req.body);
 
-    bread.create(breadData).then(() => {
+    Bread.create(breadData).then(() => {
         goHome(res);
     });
 })
 
 // [GET] /breads/breadId Renders Bread Details Page
-breadsRouter.get('/bread/:breadId', async (req, res) => {
-    const foundBread = await bread.findById(req.params.breadId);
+bread.get('/bread/:breadId', async (req, res) => {
+    const foundBread = await Bread.findById(req.params.breadId);
 
     if (foundBread => {
         const bakedBy = foundBread.getBakedBy()
@@ -51,28 +54,30 @@ breadsRouter.get('/bread/:breadId', async (req, res) => {
 })
 
 // [PUT] /breads/breadId updates Bread by Id
-breadsRouter.put('/:breadId', async (req, res) => {
+bread.put('/:breadId', async (req, res) => {
     const breadData = cleanFormData(req.body);
-    bread.findByIdAndUpdate(req.params.breadId, breadData, { new: true }).then(() => {
+    Bread.findByIdAndUpdate(req.params.breadId, breadData, { new: true }).then(() => {
         goHome(res);
     });
 })
 
 // [DELETE] /breads/breadId Deletes Bread by Id
-breadsRouter.delete('/:breadId', (req, res) => {
-    bread.findByIdAndDelete(req.params.breadId)
+bread.delete('/:breadId', (req, res) => {
+    Bread.findByIdAndDelete(req.params.breadId)
         .then(() => {
             goHome(res);
         })
 })
 
 // [GET] /breads/breadId/edit Renders Edit Form by bread Id
-breadsRouter.get('/:breadId/edit', async (req, res) => {
+bread.get('/:breadId/edit', async (req, res) => {
     const { breadId } = req.params;
-    const foundBread = await bread.findById(breadId);
+    const foundBread = await Bread.findById(breadId);
+    const bakers = await Baker.find();
     if (foundBread) {
         res.render('breads/edit', {
-            bread: foundBread
+            bread: foundBread,
+            bakers
         })
     } else {
         res.render('error404')
@@ -80,15 +85,15 @@ breadsRouter.get('/:breadId/edit', async (req, res) => {
 })
 
 // [GET] /breads/new Renders renders new bread form page
-breadsRouter.get('/new', (req, res) => {
+bread.get('/new', (req, res) => {
     res.render('breads/new')
 })
 
 // [GET] /breads/mockData adds 4 test breads to collection and redirects to /breads
-breadsRouter.get('/mockData', (req, res) => {
-    bread.insertMany(mockData).then(() => {
+bread.get('/mockData', (req, res) => {
+    Bread.insertMany(mockData).then(() => {
         goHome(res);
     });
 })
 
-module.exports = breadsRouter
+module.exports = bread

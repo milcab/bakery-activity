@@ -2,19 +2,19 @@ const React = require("react");
 
 function NavBar() {
   return (
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#">
+    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <a className="navbar-brand" href="#">
         <img
           src="https://e7.pngegg.com/pngimages/134/375/png-clipart-logo-yellow-font-bread-text-orange-thumbnail.png"
           width="30"
           height="30"
-          class="d-inline-block align-top"
+          className="d-inline-block align-top"
           alt=""
         />{" "}
         Backery-Activity
       </a>
       <button
-        class="navbar-toggler"
+        className="navbar-toggler"
         type="button"
         data-toggle="collapse"
         data-target="#navbarNav"
@@ -22,13 +22,13 @@ function NavBar() {
         aria-expanded="false"
         aria-label="Toggle navigation"
       >
-        <span class="navbar-toggler-icon"></span>
+        <span className="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item active">
-            <a class="nav-link" href="/breads">
-              Home <span class="sr-only">(current)</span>
+      <div className="collapse navbar-collapse" id="navbarNav">
+        <ul className="navbar-nav">
+          <li className="nav-item active">
+            <a className="nav-link" href="/breads">
+              Home <span className="sr-only">(current)</span>
             </a>
           </li>
         </ul>

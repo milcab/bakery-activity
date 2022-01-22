@@ -15,7 +15,7 @@ app.set('views', __dirname + '/views')
 app.set('view engine', 'jsx')
 app.engine('jsx', require('express-react-views').createEngine())
 app.use(methodOverride('_method'))
-app.use('/bakers', bakersController)
+
 // DEPENDENCIES
 
 // Connect to mongodb
@@ -33,6 +33,9 @@ app.get('/', (req, res) => {
 })
 // breads rotes
 app.use('/breads', require('./controllers/breads'))
+
+// bakers rotes
+app.use('/bakers', bakersController)
 
 //bakers
 
